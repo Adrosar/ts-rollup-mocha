@@ -1,0 +1,15 @@
+*.zip
+*.tgz
+/.vscode
+/assets/mocha
+/node_modules
+/source
+/test
+/tools
+/web/*
+!/web/bundle.iife.js
+/.gitignore
+/.mocha*
+/rollup.config.js
+/tsconfig*
+/yarn.lock

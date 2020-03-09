@@ -1,0 +1,41 @@
+{
+  "name": "ts-rollup-mocha",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "engines": {
+    "node": ">=8.11.4"
+  },
+  "contributors": [
+    {
+      "name": "Adrian Gargula",
+      "email": "adrgar@interia.pl"
+    }
+  ],
+  "scripts": {
+    "rollup:build": "rollup -c ./rollup.config.js",
+    "rollup:watch": "rollup -c ./rollup.config.js --watch",
+    "rollup:test": "rollup -c ./rollup.config.js --environment TEST",
+    "ts:build": "tsc --declaration --target ES6 --module CommonJS --project ./tools/config/ts.build.json --outDir ./dist",
+    "ts:watch": "tsc --declaration --target ES6 --module CommonJS --project ./tools/config/ts.build.json --outDir ./dist --watch",
+    "test": "mocha --config ./.mocharc.json",
+    "test:watch": "mocha --config ./.mocharc.json --watch",
+    "server": "serve --listen 8080 .",
+    "clear": "node ./tools/clear.js",
+    "release": "npm run clear && npm test && npm run rollup:test && npm run ts:build && npm run rollup:build"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "~11.0.2",
+    "@rollup/plugin-node-resolve": "~7.1.1",
+    "@rollup/plugin-typescript": "~4.0.0",
+    "@types/mocha": "~7.0.2",
+    "mocha": "~7.1.0",
+    "rollup": "~2.0.0",
+    "rollup-plugin-terser": "~5.2.0",
+    "serve": "~11.3.0",
+    "shelljs": "~0.8.3",
+    "ts-node": "~8.6.2",
+    "tslib": "~1.11.1",
+    "typescript": "~3.8.3"
+  }
+}
