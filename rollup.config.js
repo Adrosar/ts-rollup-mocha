@@ -1,7 +1,7 @@
 import path from "path";
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import { terser } from "rollup-plugin-terser";
 
 const isTest = (process.env.TEST === 'true');
@@ -29,9 +29,15 @@ export default [
 		],
 		plugins: [
 			typescript({
-				target: "ES5",
-				module: "ES6",
-				tsconfig: isTest ? getPath("tools/config/ts.test.json") : getPath("tools/config/ts.test.json")
+				verbosity: 1,
+				clean: true,
+				tsconfig: isTest ? getPath("tools/config/ts.test.json") : getPath("tools/config/ts.test.json"),
+				tsconfigOverride: {
+					compilerOptions: {
+						target: "ES5",
+						module: "ES6"
+					}
+				}
 			}),
 			nodeResolve(),
 			commonjs(),
