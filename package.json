@@ -1,10 +1,10 @@
 {
   "name": "ts-rollup-mocha",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "engines": {
-    "node": ">=8.11.4"
+    "node": ">=12.19.0"
   },
   "contributors": [
     {
@@ -13,29 +13,29 @@
     }
   ],
   "scripts": {
-    "rollup:build": "rollup -c ./rollup.config.js",
-    "rollup:watch": "rollup -c ./rollup.config.js --watch",
-    "rollup:test": "rollup -c ./rollup.config.js --environment TEST",
-    "ts:build": "tsc --declaration --target ES6 --module CommonJS --project ./tools/config/ts.build.json --outDir ./dist",
-    "ts:watch": "tsc --declaration --target ES6 --module CommonJS --project ./tools/config/ts.build.json --outDir ./dist --watch",
-    "test": "mocha --config ./.mocharc.json",
-    "test:watch": "mocha --config ./.mocharc.json --watch",
+    "rollup:build": "rollup -c rollup.config.js",
+    "rollup:watch": "rollup -c rollup.config.js --watch",
+    "rollup:test": "rollup -c rollup.config.js --environment TEST",
+    "ts:build": "node tasks.js --before-tsc && tsc --declaration && node tasks.js --after-tsc",
+    "ts:watch": "node tasks.js --before-tsc && tsc --declaration --watch",
+    "test": "mocha --config .mocharc.json",
+    "test:watch": "mocha --config .mocharc.json --watch",
     "server": "serve --listen 8080 .",
-    "clear": "node ./tools/clear.js",
+    "clear": "node tasks.js --remove-trash",
     "release": "npm run clear && npm test && npm run rollup:test && npm run ts:build && npm run rollup:build"
   },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "~11.0.2",
-    "@rollup/plugin-node-resolve": "~7.1.1",
-    "@types/mocha": "~7.0.2",
-    "mocha": "~7.1.0",
-    "rollup": "~2.0.0",
-    "rollup-plugin-terser": "~5.2.0",
-    "rollup-plugin-typescript2": "~0.26.0",
-    "serve": "~11.3.0",
-    "shelljs": "~0.8.3",
-    "ts-node": "~8.6.2",
-    "tslib": "~1.11.1",
-    "typescript": "~3.8.3"
+  "dependencies": {
+    "@rollup/plugin-commonjs": "~21.0.1",
+    "@rollup/plugin-node-resolve": "~13.1.3",
+    "@types/mocha": "~9.0.0",
+    "mocha": "~9.1.4",
+    "rollup": "~2.64.0",
+    "rollup-plugin-terser": "~7.0.2",
+    "rollup-plugin-typescript2": "~0.31.1",
+    "serve": "~13.0.2",
+    "shelljs": "~0.8.5",
+    "ts-node": "~10.4.0",
+    "tslib": "~2.3.1",
+    "typescript": "~4.5.4"
   }
 }

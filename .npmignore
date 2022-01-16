@@ -3,6 +3,8 @@
 /.vscode
 /assets/mocha
 /node_modules
+/temp
+/tmp
 /test
 /tools
 /web/*

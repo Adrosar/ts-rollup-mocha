@@ -11,16 +11,16 @@ console.log("# Rollup.js environment:");
 console.log(" - TEST:", isTest);
 console.log(" - PROD:", isProduction);
 
-function getPath(_path) {
-	return path.resolve(__dirname, _path);
+function root(..._args) {
+	return path.resolve(__dirname, ..._args);
 }
 
 export default [
 	{
-		input: isTest ? getPath("test/index.ts") : getPath("source/index.ts"),
+		input: isTest ? root("test", "index.ts") : root("source", "index.ts"),
 		output: {
 			name: undefined,
-			file: isTest ? getPath("web/test.iife.js") : getPath("web/bundle.iife.js"),
+			file: isTest ? root("web", "test.iife.js") : root("web", "bundle.iife.js"),
 			format: 'iife',
 			globals: {}
 		},
@@ -31,7 +31,7 @@ export default [
 			typescript({
 				verbosity: 1,
 				clean: true,
-				tsconfig: isTest ? getPath("tools/config/ts.test.json") : getPath("tools/config/ts.test.json"),
+				tsconfig: root("tsconfig.json"),
 				tsconfigOverride: {
 					compilerOptions: {
 						target: "ES5",

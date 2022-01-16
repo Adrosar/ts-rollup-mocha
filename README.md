@@ -23,8 +23,17 @@ Projekt dostarcza gotowy, skonfigurowany zestaw narzędzi:
 - `npm run test` lub `npm test` uruchamia testy z wykorzystaniem framework'a [Mocha](https://mochajs.org)
 - `npm run test:watch` tryb czuwaj i testuj dla `npm run test`
 - `npm run server` uruchamia serwer deweloperski pod adresem http://127.0.0.1:8080
-- `npm run clear` usuwa z projektu wszystkie pliki które można zbudować powyższymi poleceniami
+- `npm run clear` czyści repozytrium z plików tymczasowych
 - `npm run release` przeprowadza testy i buduje pliki gotowe do dystrybucji na produkcję
+
+
+
+### Folder "temp"
+
+Repozytrium używa folderu **temp** dla zadań:
+
+- `npm run ts:build`: Po zbudowaniu odpowiednie pliki są przenoszone do folderu **dist**.
+- `npm run ts:watch`: Żadne pliki nie są przenoszone!
 
 
 
