@@ -1,4 +1,4 @@
-import { foo } from "../../source/foo";
+import { foo } from "../source/foo";
 
 describe("Funkcja `foo`", () => {
     it("`foo` ma być funkcją ", () => {

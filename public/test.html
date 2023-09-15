@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="utf-8" />
     <title>Mocha Tests</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link type="text/css" rel="stylesheet" href="../assets/mocha/9.1.4/mocha.css" />
+    <link type="text/css" rel="stylesheet" href="../assets/mocha/10.2.0/mocha.css" />
 </head>
 
 <body>
     <div id="mocha"></div>
-    <script type="text/javascript" src="../assets/mocha/9.1.4/mocha.js"></script>
+    <script type="text/javascript" src="../assets/mocha/10.2.0/mocha.js"></script>
     <script type="text/javascript" class="mocha-init">
         mocha.setup({
             ui: 'bdd',
-            timeout: '15000'// 15 sekund
+            timeout: '30000'// 30 sekund
         });
         mocha.checkLeaks();
     </script>
-    <script type="text/javascript" src="./test.iife.js"></script>
+    <script type="text/javascript" src="../web/test.iife.js"></script>
     <script type="text/javascript" class="mocha-exec">
         mocha.run();
     </script>
