@@ -1,4 +1,4 @@
-import { Boo } from "../../source/boo";
+import { Boo } from "../source/boo";
 
 describe("Klasa Boo", () => {
     it("`Boo` ma być konstruktorem", () => {

@@ -1,2 +1,2 @@
-import "./spec/boo";
-import "./spec/foo";
+import "./boo";
+import "./foo";

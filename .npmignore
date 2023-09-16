@@ -7,10 +7,11 @@
 /tmp
 /test
 /tools
-/web/*
-!/web/bundle.iife.js
+/public/test.*
+/web/test.*
 /.gitignore
 /.mocha*
 /rollup.config.js
 /tsconfig*
 /yarn.lock
+/tasks.js

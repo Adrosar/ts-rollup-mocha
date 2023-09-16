@@ -5,3 +5,5 @@ const boo = new Boo();
 
 console.log("->", boo.type);
 console.log("->", foo(1, 2));
+
+export { boo }

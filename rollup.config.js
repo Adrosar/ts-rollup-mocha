@@ -1,7 +1,7 @@
 import path from "path";
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 import { terser } from "rollup-plugin-terser";
 
 const isTest = (process.env.TEST === 'true');
@@ -11,16 +11,16 @@ console.log("# Rollup.js environment:");
 console.log(" - TEST:", isTest);
 console.log(" - PROD:", isProduction);
 
-function root(..._args) {
+function createAbsPath(..._args) {
 	return path.resolve(__dirname, ..._args);
 }
 
 export default [
 	{
-		input: isTest ? root("test", "index.ts") : root("source", "index.ts"),
+		input: isTest ? createAbsPath("test", "index.ts") : createAbsPath("source", "index.ts"),
 		output: {
-			name: undefined,
-			file: isTest ? root("web", "test.iife.js") : root("web", "bundle.iife.js"),
+			name: isTest ? undefined : 'myLib',
+			file: isTest ? createAbsPath("web", "test.iife.js") : createAbsPath("web", "bundle.iife.js"),
 			format: 'iife',
 			globals: {}
 		},
@@ -29,23 +29,31 @@ export default [
 		],
 		plugins: [
 			typescript({
-				verbosity: 1,
-				clean: true,
-				tsconfig: root("tsconfig.json"),
-				tsconfigOverride: {
-					compilerOptions: {
-						target: "ES5",
-						module: "ES6"
-					}
+				tsconfig: createAbsPath("tsconfig.json"),
+				tslib: require.resolve('tslib'),
+				compilerOptions: {
+					target: "ES5",
+					module: "ES6"
 				}
+
 			}),
 			nodeResolve(),
 			commonjs(),
 			isProduction && terser({
+				output: {
+					comments: false,
+					beautify: false,
+					webkit: true,
+				},
+				mangle: {
+					properties: {
+						regex: /^\_.+\$\d$/,
+					},
+				},
 				ecma: 5,
 				ie8: true,
 				safari10: true,
-				warnings: true
+				warnings: true,
 			})
 		]
 	}
