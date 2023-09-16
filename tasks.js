@@ -3,30 +3,30 @@
 const path = require('path');
 const shell = require('shelljs');
 
-function root(..._args) {
+function createAbsPath(..._args) {
     return path.resolve(__dirname, ..._args);
 }
 
 function beforeTSC() {
-    if (shell.test('-d', root('temp', 'build'))) {
-        shell.rm('-rf', root('temp', 'build', '*'));
+    if (shell.test('-d', createAbsPath('temp', 'build'))) {
+        shell.rm('-rf', createAbsPath('temp', 'build', '*'));
     }
 }
 
 function afterTSC() {
-    const dist = root('dist');
+    const dist = createAbsPath('dist');
     if (shell.test('-d', dist)) {
-        shell.rm('-rf', root(dist, '*'));
+        shell.rm('-rf', createAbsPath(dist, '*'));
     } else {
         shell.mkdir('-p', dist);
     }
 
-    shell.mv('-f', root('temp', 'build', 'source', '*'), dist);
+    shell.mv('-f', createAbsPath('temp', 'build', 'source', '*'), dist);
 }
 
 function removeTrash() {
-    shell.rm('-rf', root('temp'));
-    shell.rm('-f', root('*.tgz'));
+    shell.rm('-rf', createAbsPath('temp'));
+    shell.rm('-f', createAbsPath('*.tgz'));
 }
 
 function main() {
@@ -53,12 +53,4 @@ function main() {
     }
 }
 
-if (
-    shell.test('-d', root('source')) &&
-    shell.test('-d', root('node_modules')) &&
-    shell.test('-f', root('package.json'))
-) {
-    main();
-} else {
-    throw '[TASKS] Error';
-}
+main();
